@@ -1,9 +1,10 @@
 library(shiny)
+library(dplyr)
 library(bslib)
 library(DT)
 
 # Load course data
-courses <- read.csv("data/courses.csv", stringsAsFactors = FALSE)
+courses <- read.csv("https://github.com/BIFX547-26/ShinyHood/raw/refs/heads/main/data/courses.csv", stringsAsFactors = FALSE)
 
 # Columns shown in the browse table
 TABLE_COLS <- c("course_number", "course_name", "last_taught", "next_planned")
@@ -28,10 +29,8 @@ course_table_server <- function(id, required_col) {
   moduleServer(id, function(input, output, session) {
     # Include courses required for this program (flag == 1) or elective (both flags == 0)
     program_courses <- reactive({
-      df <- courses[courses[[required_col]] == 1 |
-                      (courses$required_MS == 0 & courses$required_Cert == 0), ]
-      df$type <- ifelse(df[[required_col]] == 1, "Required", "Elective")
-      df
+      mutate(courses,
+             type = ifelse(.data[[required_col]] == 1, "Required", "Elective"))
     })
 
     filtered <- reactive({
