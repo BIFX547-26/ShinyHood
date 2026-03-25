@@ -8,6 +8,7 @@ entrypoint = 'app.R'
 validate = true
 files = [
   '/app.R',
+  '/manifest.json',
   '/.posit/publish/ShinyHood-TCIU.toml',
   '/.posit/publish/deployments/deployment-M3SE.toml'
 ]

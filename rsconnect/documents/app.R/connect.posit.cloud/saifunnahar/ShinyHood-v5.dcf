@@ -1,0 +1,10 @@
+name: ShinyHood-v5
+title:
+username: saifunnahar
+account: saifunnahar
+server: connect.posit.cloud
+hostUrl: https://api.connect.posit.cloud/v1
+appId: 019d255b-5625-fb39-9ccb-9e069d83dcaa
+bundleId:
+url: https://connect.posit.cloud/saifunnahar/content/019d255b-5625-fb39-9ccb-9e069d83dcaa
+version: 1

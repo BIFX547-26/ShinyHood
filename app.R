@@ -2,6 +2,7 @@ library(shiny)
 library(dplyr)
 library(bslib)
 library(DT)
+library(GSEApp)
 
 # Load course data
 courses <- read.csv("https://github.com/BIFX547-26/ShinyHood/raw/refs/heads/main/data/courses.csv", stringsAsFactors = FALSE)
@@ -81,11 +82,18 @@ ui <- page_navbar(
       course_table_ui("cert")
     )
   ),
+  nav_panel(
+    "GSEA Analysis",
+    card(
+      card_header("Gene Set Enrichment Analysis"),
+      GSEApp_UI("gsea")
+    )
+  ),
   nav_spacer(),
   nav_item(
     tags$a(
       "Hood College",
-      href = "https://www.hood.edu",
+      href = "https://www.hood.edu/BIFX547",
       target = "_blank",
       class = "nav-link"
     )
@@ -97,6 +105,9 @@ ui <- page_navbar(
 server <- function(input, output, session) {
   course_table_server("ms",   required_col = "required_MS")
   course_table_server("cert", required_col = "required_Cert")
+  
+  # Initialize the GSEA module from your package
+  GSEApp_Server("gsea")
 }
 
 shinyApp(ui, server)
